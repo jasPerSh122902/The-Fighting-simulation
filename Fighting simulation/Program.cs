@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FightSimulation;
+using System;
 
 namespace Fighting_simulation
 {
