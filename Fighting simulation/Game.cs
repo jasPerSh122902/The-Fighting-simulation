@@ -14,48 +14,151 @@ namespace FightSimulation
 
     class Game
     {
+
+        bool gameOver = false;
+        Monster currentMonster1;
+        Monster currentMonster2;
+
+        //Monster 
+        Monster Wompus;
+        Monster clompus;
+        Monster Lompus;
+        Monster caral;
+        int currentMonsterIndex = 1;
+
+
         public void Run()
         {
-            //Monster 1
-            Monster monster1;
-            monster1.name = "Wompus";
-            monster1.attack = 20.0f;
-            monster1.defense = 15.0f;
-            monster1.health = 20.0f;
 
-            //Monster 2
-            Monster monster2;
-            monster2.name = "clompus";
-            monster2.attack = 19.0f;
-            monster2.defense = 10.0f;
-            monster2.health = 40.0f;
 
-            //Print monster1 stats
-            PrintStats(monster1);
-            //Print monster2 stats
-            PrintStats(monster2);
+            Wompus.name = " Wompus ";
+            Wompus.attack = 20.0f;
+            Wompus.defense = 15.0f;
+            Wompus.health = 20.0f;
 
-            //Monster 1 attacks monster 2
-            float damageTaken = Fight(monster1, monster2);
-            Console.WriteLine(monster2.name + "has taken " + damageTaken);
 
-            //Monster 2 attacks monster 1
+            clompus.name = " clompus ";
+            clompus.attack = 19.0f;
+            clompus.defense = 10.0f;
+            clompus.health = 40.0f;
 
-            damageTaken = Fight(monster2, monster1);
-            monster1.health -= damageTaken;
-            Console.WriteLine(monster1.name + "has taken " + damageTaken);
 
-            Console.ReadKey();
-            Console.Clear();
+            Lompus.name = " Lompus ";
+            Lompus.attack = 21.0f;
+            Lompus.defense = 24.0f;
+            Lompus.health = 17.0f;
 
-            //Print monster1 stats
-            PrintStats(monster1);
-            //Print monster2 stats
-            PrintStats(monster2);
-            Console.ReadKey();
+
+            caral.name = " caral ";
+            caral.attack = 26.0f;
+            caral.defense = 14.0f;
+            caral.health = 10.0f;
+
+            
         }
 
-        float Fight(Monster attacker, Monster defender)
+        void Update()
+        {
+            Battle();
+
+        }
+
+        Monster GetMonster(int monsterIndex)
+        {
+            Monster monster;
+            monster.name = "None";
+            monster.attack = 1;
+            monster.defense = 1;
+            monster.health = 1;
+            if (monsterIndex == 1)
+            {
+               monster = caral;
+            }
+            else if (monsterIndex == 2)
+            {
+                monster = clompus;
+            }
+            else if (monsterIndex == 3)
+            {
+                monster = Wompus;
+            }
+            else if (monsterIndex == 4)
+            {
+                monster = clompus;
+            }
+
+            return monster;
+        }
+
+
+        void Battle()
+        {
+            //Print currentMonster1
+            PrintStats(currentMonster1);
+            //Print currentMonster2
+            PrintStats(currentMonster2);
+
+            //Monster 1 attacks monster 2
+            float damageTaken = Fight(currentMonster1, ref currentMonster2);
+            Console.WriteLine(currentMonster2.name + "has taken " + damageTaken);
+
+            //Monster 2 attacks monster 1
+            damageTaken = Fight(currentMonster2, ref currentMonster1);
+            currentMonster1.health -= damageTaken;
+            Console.WriteLine(currentMonster1.name + "has taken " + damageTaken);
+
+        }
+
+        void UpdateCurrentMonsters()
+        {
+            if()
+        }
+        string StartBattle( ref Monster Wompus, ref Monster clompus )
+        {
+
+            string matchResult = "No contest";
+
+            while (Wompus.health > 0 && clompus.health > 0)
+            {
+                //Print Wompus stats
+                PrintStats(Wompus);
+                //Print clompus stats
+                PrintStats(clompus);
+
+                //Monster 1 attacks monster 2
+                float damageTaken = Fight(Wompus, ref clompus);
+                Console.WriteLine(clompus.name + "has taken " + damageTaken);
+
+                //Monster 2 attacks monster 1
+                damageTaken = Fight(clompus, ref Wompus);
+                Wompus.health -= damageTaken;
+                Console.WriteLine(Wompus.name + "has taken " + damageTaken);
+
+                //clear and make sure every thing is good to continue the loop
+                Console.ReadKey(true);
+                Console.Clear();
+            }
+
+            if(Wompus.health <= 0 && clompus.health <= 0)
+            {
+                matchResult = "Draw";
+            }
+            if (Wompus.health > 0)
+            {
+                matchResult = Wompus.name;
+            }
+            else if (clompus.health > 0)
+            {
+                matchResult = clompus.name;
+            }
+ 
+            return matchResult;
+        }
+
+
+
+
+        float Fight(Monster attacker, ref Monster defender)
         {
             float damageTaken = CalculateDamage(attacker, defender);
             defender.health -= damageTaken;
