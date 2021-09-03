@@ -44,9 +44,9 @@ namespace FightSimulation
 
             //do not spawn in current situation "Lompu"
             Lompus.name = " Lompus ";
-            Lompus.attack = 21.0f;
-            Lompus.defense = 24.0f;
-            Lompus.health = 17.0f;
+            Lompus.attack = 18.0f;
+            Lompus.defense = 25.0f;
+            Lompus.health = 8.0f;
 
 
             caral.name = " caral ";
