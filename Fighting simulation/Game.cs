@@ -29,7 +29,19 @@ namespace FightSimulation
 
         public void Run()
         {
+            Start();
+            
+            while(!gameOver)
+            {
+                Update();
+            }
+        }
 
+        /// <summary>
+        /// The start is to start it makes the current monster be set and the stats for monster.
+        /// </summary>
+        void Start()
+        {
             //initilizing Monsters
             Wompus.name = " Wompus ";
             Wompus.attack = 20.0f;
@@ -58,12 +70,6 @@ namespace FightSimulation
             currentMonster1 = GetMonster(currentMonsterIndex);
             currentMonsterIndex++;
             currentMonster2 = GetMonster(currentMonsterIndex);
-
-            
-            while(!gameOver)
-            {
-                Update();
-            }
         }
 
         void Update()
