@@ -30,7 +30,7 @@ namespace FightSimulation
         public void Run()
         {
 
-
+            //initilizing Monsters
             Wompus.name = " Wompus ";
             Wompus.attack = 20.0f;
             Wompus.defense = 15.0f;
@@ -42,7 +42,7 @@ namespace FightSimulation
             clompus.defense = 10.0f;
             clompus.health = 40.0f;
 
-
+            //do not spawn in current situation "Lompu"
             Lompus.name = " Lompus ";
             Lompus.attack = 21.0f;
             Lompus.defense = 24.0f;
@@ -54,15 +54,31 @@ namespace FightSimulation
             caral.defense = 14.0f;
             caral.health = 10.0f;
 
+            //getting the initilazation of the monsters to fight and the order of monster fight
+            currentMonster1 = GetMonster(currentMonsterIndex);
+            currentMonsterIndex++;
+            currentMonster2 = GetMonster(currentMonsterIndex);
+
             
+            while(!gameOver)
+            {
+                Update();
+            }
         }
 
         void Update()
         {
             Battle();
-
+            UpdateCurrentMonsters();
+            Console.ReadKey(true);
+            Console.Clear();
         }
 
+        /// <summary>
+        /// This cataloges the monster in play and makes it so each monster is put on the battle. Also simpliyies the process of the monster fight.
+        /// </summary>
+        /// <param name="monsterIndex"></param>
+        /// <returns></returns>
         Monster GetMonster(int monsterIndex)
         {
             Monster monster;
@@ -70,6 +86,8 @@ namespace FightSimulation
             monster.attack = 1;
             monster.defense = 1;
             monster.health = 1;
+
+
             if (monsterIndex == 1)
             {
                monster = caral;
@@ -91,6 +109,9 @@ namespace FightSimulation
         }
 
 
+        /// <summary>
+        /// Simulates one turn in the current monster fight
+        /// </summary>
         void Battle()
         {
             //Print currentMonster1
@@ -109,10 +130,50 @@ namespace FightSimulation
 
         }
 
+        /// <summary>
+        /// Changes the current monster if it dies and increases counter by one if needed.
+        /// If all monsters are died then end the game.
+        /// </summary>
         void UpdateCurrentMonsters()
         {
-            if()
-        }
+
+            //if monster1 or 2 dies they will get replaced
+            //this is monster1
+            if (currentMonster1.health <= 0 )
+            {
+
+                //increases counter by one if monster 1 dies.
+                currentMonsterIndex++;
+                currentMonster1 = GetMonster(currentMonsterIndex);
+
+            }
+
+            //then this is monster 2 replace
+            if (currentMonster2.health <= 0)
+            {
+
+                //increases counter by one if monster 2 dies
+                currentMonsterIndex++;
+                currentMonster2 = GetMonster(currentMonsterIndex);
+
+            }
+
+            //if either monster is set or initilized by "None" and the last monster has been put out
+            if (currentMonster2.name == "None" || currentMonster1.name == "None" && currentMonsterIndex >= 4)
+            {
+
+                //... game is ending
+                Console.WriteLine("Simulation Over :]");
+                gameOver = true;
+            }
+        } 
+
+        /// <summary>
+        /// Starts the battle by with current monsters.
+        /// </summary>
+        /// <param name="Wompus"></param>
+        /// <param name="clompus"></param>
+        /// <returns></returns>
         string StartBattle( ref Monster Wompus, ref Monster clompus )
         {
 
