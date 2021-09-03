@@ -94,7 +94,7 @@ namespace FightSimulation
             }
             else if (monsterIndex == 2)
             {
-                monster = clompus;
+                monster = Lompus;
             }
             else if (monsterIndex == 3)
             {
