@@ -68,6 +68,15 @@ namespace FightSimulation
             caral.defense = 14.0f;
             caral.health = 10.0f;
 
+            ResetCurrentMonsters();
+        }
+
+        /// <summary>
+        /// resets the current monster in the retart menu back to play for more rounds.
+        /// </summary>
+        void ResetCurrentMonsters()
+        {
+            currentMonsterIndex = 0;
             //getting the initilazation of the monsters to fight and the order of monster fight
             currentMonster1 = GetMonster(currentMonsterIndex);
             currentMonsterIndex++;
@@ -152,6 +161,7 @@ namespace FightSimulation
             //the looping of the game it self
             if (choice == 1)
             {
+                ResetCurrentMonsters();
                 currentScence = 1;
             }
             //the game over
