@@ -85,6 +85,29 @@ namespace FightSimulation
 
         void UpdateCurrentScene()
         {
+
+            switch (currentScence)
+            {
+
+                case 0:
+                    DisplayStartMenu();
+                    break;
+
+                case 1:
+                    Battle();
+                    UpdateCurrentMonsters();
+                    Console.ReadKey();
+                    break;
+
+                case 2:
+                    DisplayRestartMenu();
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid scene index");
+                    break;
+            }
+
             if (currentScence == 0)
             {
                 DisplayStartMenu();
