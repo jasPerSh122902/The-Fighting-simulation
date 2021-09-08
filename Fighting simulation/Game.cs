@@ -24,14 +24,16 @@ namespace FightSimulation
         Monster clompus;
         Monster Lompus;
         Monster caral;
-        int currentMonsterIndex = 1;
 
+        //global varabels that are for scene and monster count.
+        int currentMonsterIndex = 0;
+        int currentScence = 0;
 
         public void Run()
         {
             Start();
-            
-            while(!gameOver)
+
+            while (!gameOver)
             {
                 Update();
             }
@@ -57,7 +59,7 @@ namespace FightSimulation
             //do not spawn in current situation "Lompu"
             Lompus.name = " Lompus ";
             Lompus.attack = 18.0f;
-            Lompus.defense = 25.0f;
+            Lompus.defense = 20.0f;
             Lompus.health = 8.0f;
 
 
@@ -72,11 +74,125 @@ namespace FightSimulation
             currentMonster2 = GetMonster(currentMonsterIndex);
         }
 
+        void UpdateCurrentScene()
+        {
+            if (currentScence == 0)
+            {
+                DisplayStartMenu();
+
+            }
+            else if (currentScence == 1)
+            {
+                Battle();
+                UpdateCurrentMonsters();
+                Console.ReadKey(true);
+            }
+            else if (currentScence == 2)
+            {
+                DisplayRestartMenu();
+            }
+        }
+
+        /// <summary>
+        /// This function is meant to get the input of the player and has a option that if input is invalid then pause.
+        /// </summary>
+        /// <param name="description">The situation or reason for the choices or story.</param>
+        /// <param name="option1">first choice for the player</param>
+        /// <param name="option2">second choice for the player</param>
+        /// <param name="pauseInvalid">if true, the player must press a key to continue after inputting an invald input</param>
+        /// <returns>returns the number in which the player has choosne, Returns 0 if an inbalid input was recieved</returns>
+        int GetInput(string description, string option1, string option2, bool pauseInvalid = false)
+        {
+            //printing the context of the situation "story"
+            Console.WriteLine(description);
+            Console.WriteLine("1. " + option1);
+            Console.WriteLine("2. " + option2);
+
+            //player input
+            string input = Console.ReadLine();
+            //the choice is a choice its a place holder to have a simpaler way of seeing the choices the play can make
+            int choice = 0;
+            //if 1 
+            if (input == "1")
+            {   
+                //set the return variable to be 1
+                choice = 1;
+            }
+            //if 2
+            else if (input == "2")
+            {
+                //set return variable to be 2
+                choice = 2;
+            }
+            //if nether of the choices
+            else
+            {
+                //invalid input resieved aka "error"
+                Console.WriteLine("Not valid Input try again!");
+
+                //Then the read key to be optional
+                if (pauseInvalid)
+                {
+                    //... make the player press a key to continue.
+                    Console.ReadKey();
+                }
+            }
+
+            //the return varable "choice"
+            return choice;
+        }
+
+        /// <summary>
+        /// This is the start menu that comes up to allow player to start or leave.
+        /// </summary>
+        void DisplayStartMenu()
+        {
+            int choice = GetInput("Hellow this is the monster fight simulation", "To begain", "To leave");
+
+            //the looping of the game it self
+            if (choice == 1)
+            {
+                currentScence = 1;
+            }
+            //the game over
+            else if (choice == 2)
+            {
+                gameOver = true;
+            }
+        }
+
+        /// <summary>
+        /// This is meant to be the ending of the simulation. And is a display
+        /// </summary>
+        void DisplayRestartMenu()
+        {
+            //the ending of the game // discription of what the player is seeing when the simulation is ending
+            int choice = GetInput("Simulation is endding. Would you like to play again?", "Yes", "No");
+                
+            if (choice ==1)
+            {
+                //the looping of the game it self for the ending
+                currentScence = 0;
+            }
+            else if (choice == 2)
+            {
+                //the game over
+                gameOver = true;
+            }
+        }
+
+
+        void DisplayMainMenu()
+        {
+
+        }
+
+        /// <summary>
+        /// Called every loop in a game loop 
+        /// </summary>
         void Update()
         {
-            Battle();
-            UpdateCurrentMonsters();
-            Console.ReadKey(true);
+            UpdateCurrentScene();
             Console.Clear();
         }
 
@@ -94,19 +210,19 @@ namespace FightSimulation
             monster.health = 1;
 
 
-            if (monsterIndex == 1)
+            if (monsterIndex == 0)
             {
                monster = caral;
             }
-            else if (monsterIndex == 2)
+            else if (monsterIndex == 1)
             {
                 monster = Lompus;
             }
-            else if (monsterIndex == 3)
+            else if (monsterIndex == 2)
             {
                 monster = Wompus;
             }
-            else if (monsterIndex == 4)
+            else if (monsterIndex == 3)
             {
                 monster = clompus;
             }
@@ -169,8 +285,7 @@ namespace FightSimulation
             {
 
                 //... game is ending
-                Console.WriteLine("Simulation Over :]");
-                gameOver = true;
+                currentScence = 2;
             }
         } 
 
