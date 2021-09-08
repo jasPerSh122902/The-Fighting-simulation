@@ -145,17 +145,26 @@ namespace FightSimulation
                 DisplayRestartMenu();
             }
         }
+
         void  theNumbers()
         {
             int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
             
-            for (int i = numbers[0]; i <= numbers[4]; i++)
+            for (int i = numbers[4]; i >= numbers[0]; i--)
             {
-                Console.WriteLine(numbers[0]);
-                numbers[0]++;
+                Console.WriteLine(numbers[4]);
+                numbers[4]--;
             }
             
         }
+        int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
+
+        foreach theNumbs(int number in numbers)
+        {
+            Console.WriteLine(numbers[4] || numbers[0])
+        }
+
+
         
         /// <summary>
         /// This function is meant to get the input of the player and has a option that if input is invalid then pause.
