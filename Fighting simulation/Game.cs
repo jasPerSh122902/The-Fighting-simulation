@@ -31,8 +31,10 @@ namespace FightSimulation
 
         public void Run()
         {
-            Start();
 
+
+            
+            Start();
             while (!gameOver)
             {
                 Update();
@@ -42,11 +44,13 @@ namespace FightSimulation
         }
 
 
+    
         /// <summary>
         /// Called every loop in a game loop 
         /// </summary>
         void Update()
         {
+            theNumbers();
             UpdateCurrentScene();
             Console.Clear();
         }
@@ -141,7 +145,18 @@ namespace FightSimulation
                 DisplayRestartMenu();
             }
         }
-
+        void  theNumbers()
+        {
+            int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
+            
+            for (int i = numbers[0]; i <= numbers[4]; i++)
+            {
+                Console.WriteLine(numbers[0]);
+                numbers[0]++;
+            }
+            
+        }
+        
         /// <summary>
         /// This function is meant to get the input of the player and has a option that if input is invalid then pause.
         /// </summary>
