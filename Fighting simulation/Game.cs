@@ -37,6 +37,23 @@ namespace FightSimulation
             {
                 Update();
             }
+
+            End();
+        }
+
+
+        /// <summary>
+        /// Called every loop in a game loop 
+        /// </summary>
+        void Update()
+        {
+            UpdateCurrentScene();
+            Console.Clear();
+        }
+
+        void End()
+        {
+            Console.WriteLine("Goodbye :] ");
         }
 
         /// <summary>
@@ -220,14 +237,6 @@ namespace FightSimulation
 
         }
 
-        /// <summary>
-        /// Called every loop in a game loop 
-        /// </summary>
-        void Update()
-        {
-            UpdateCurrentScene();
-            Console.Clear();
-        }
 
         /// <summary>
         /// This cataloges the monster in play and makes it so each monster is put on the battle. Also simpliyies the process of the monster fight.
