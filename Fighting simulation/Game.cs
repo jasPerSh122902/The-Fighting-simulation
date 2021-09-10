@@ -24,16 +24,14 @@ namespace FightSimulation
         Monster clompus;
         Monster Lompus;
         Monster caral;
+        Monster[] monsters;
 
         //global varabels that are for scene and monster count.
         int currentMonsterIndex = 0;
         int currentScence = 0;
 
         public void Run()
-        {
-
-
-            
+        {   
             Start();
             while (!gameOver)
             {
@@ -50,8 +48,6 @@ namespace FightSimulation
         /// </summary>
         void Update()
         {
-            theNumbers();
-            PrintSmallestAndLargest(numbers);
             UpdateCurrentScene();
             Console.Clear();
         }
@@ -90,21 +86,23 @@ namespace FightSimulation
             caral.defense = 14.0f;
             caral.health = 10.0f;
 
+            //..the updates monster index that is just a array
+            monsters = new Monster[] { Wompus, clompus, Lompus, caral };
+
             ResetCurrentMonsters();
         }
 
         /// <summary>
-        /// resets the current monster in the retart menu back to play for more rounds.
+        /// resets the current monster in the retart menu back to play for more rounds. But it uses a array insted of the index to hold it together.
         /// </summary>
         void ResetCurrentMonsters()
         {
             currentMonsterIndex = 0;
             //getting the initilazation of the monsters to fight and the order of monster fight
-            currentMonster1 = GetMonster(currentMonsterIndex);
+            currentMonster1 = monsters[currentMonsterIndex];
             currentMonsterIndex++;
-            currentMonster2 = GetMonster(currentMonsterIndex);
+            currentMonster2 = monsters[currentMonsterIndex];
         }
-
         void UpdateCurrentScene()
         {
 
@@ -146,52 +144,7 @@ namespace FightSimulation
                 DisplayRestartMenu();
             }
         }
-        int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
-        void  theNumbers()
-        {
-            int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
-            for (int i = numbers[4]; i >= numbers[0]; i--)
-            {
-                Console.WriteLine(numbers[4]);
-                numbers[4]--;
-            }
-            Console.WriteLine(numbers[4]);
-            Console.WriteLine(numbers[0]);
-
-        }
-
-        void PrintSmallestAndLargest(int[] arr)
-        {
-            //The variables for the array function to work
-            int largest = arr[0];
-            int smallest = arr[0];
-
-            //the array gets scaned
-            for (int i = 0; i < arr.Length; i++)
-            {
-                //...find the largest number and 
-                if (arr[i] > largest)
-                {
-                    //...saves it
-                    largest = arr[i];
-                }
-
-                //...finds the smallest number and
-                if (arr[i] < smallest)
-                {
-                    //...saves it
-                    smallest = arr[i];
-                }
-            }
-
-            //prints the largest and smallest numbers in array
-            Console.WriteLine("Largest: " + largest);
-            Console.WriteLine("Smallest:" + smallest);
-
-        }
-
- 
-        
+  
         /// <summary>
         /// This function is meant to get the input of the player and has a option that if input is invalid then pause.
         /// </summary>
