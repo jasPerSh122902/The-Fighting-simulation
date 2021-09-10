@@ -306,12 +306,12 @@ namespace FightSimulation
 
             //if monster1 or 2 dies they will get replaced
             //this is monster1
-            if (currentMonster1.health <= 0 )
+            if (currentMonster1.health <= 0)
             {
 
                 //increases counter by one if monster 1 dies.
                 currentMonsterIndex++;
-                currentMonster1 = GetMonster(currentMonsterIndex);
+                currentMonster1 = monsters[currentMonsterIndex];
 
             }
 
@@ -321,7 +321,7 @@ namespace FightSimulation
 
                 //increases counter by one if monster 2 dies
                 currentMonsterIndex++;
-                currentMonster2 = GetMonster(currentMonsterIndex);
+                currentMonster2 = monsters[currentMonsterIndex];
 
             }
 
