@@ -149,23 +149,37 @@ namespace FightSimulation
         void  theNumbers()
         {
             int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
-            
             for (int i = numbers[4]; i >= numbers[0]; i--)
             {
                 Console.WriteLine(numbers[4]);
                 numbers[4]--;
             }
+            Console.WriteLine(numbers[4]);
+            Console.WriteLine(numbers[0]);
             
         }
-        int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
-
-        foreach theNumbs(int number in numbers)
-        {
-            Console.WriteLine(numbers[4] || numbers[0])
-        }
-
-
         
+        void PrintSmallestAndLargest(int[] arr)
+        {
+            int largest = arr[0];
+            int smallest = arr[0];
+
+            for (int i =0; i < arr.Length; i++)
+            {
+                if (arr[i] > largest)
+                {
+                    largest = arr[i];
+                }
+
+                if (arr[i] < smallest)
+                {
+                    smallest = arr[i];
+                }
+            }
+
+            Console.WriteLine("Largest: " + largest);
+            Console.WriteLine("Smallest:" + smallest);
+        }
         /// <summary>
         /// This function is meant to get the input of the player and has a option that if input is invalid then pause.
         /// </summary>
