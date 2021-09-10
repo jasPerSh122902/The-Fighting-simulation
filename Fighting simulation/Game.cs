@@ -51,6 +51,7 @@ namespace FightSimulation
         void Update()
         {
             theNumbers();
+            PrintSmallestAndLargest(numbers);
             UpdateCurrentScene();
             Console.Clear();
         }
@@ -145,7 +146,7 @@ namespace FightSimulation
                 DisplayRestartMenu();
             }
         }
-
+        int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
         void  theNumbers()
         {
             int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
@@ -156,30 +157,41 @@ namespace FightSimulation
             }
             Console.WriteLine(numbers[4]);
             Console.WriteLine(numbers[0]);
-            
+
         }
-        
+
         void PrintSmallestAndLargest(int[] arr)
         {
+            //The variables for the array function to work
             int largest = arr[0];
             int smallest = arr[0];
 
-            for (int i =0; i < arr.Length; i++)
+            //the array gets scaned
+            for (int i = 0; i < arr.Length; i++)
             {
+                //...find the largest number and 
                 if (arr[i] > largest)
                 {
+                    //...saves it
                     largest = arr[i];
                 }
 
+                //...finds the smallest number and
                 if (arr[i] < smallest)
                 {
+                    //...saves it
                     smallest = arr[i];
                 }
             }
 
+            //prints the largest and smallest numbers in array
             Console.WriteLine("Largest: " + largest);
             Console.WriteLine("Smallest:" + smallest);
+
         }
+
+ 
+        
         /// <summary>
         /// This function is meant to get the input of the player and has a option that if input is invalid then pause.
         /// </summary>
