@@ -296,7 +296,17 @@ namespace FightSimulation
             Console.WriteLine(currentMonster1.name + "has taken " + damageTaken);
 
         }
+        bool TryEndSimulation()
+        {
+            bool simulationOver = currentMonsterIndex >= monsters.Length;
 
+            if(simulationOver)
+            {
+                currentScence = 2;
+            }
+
+            return simulationOver;
+        }
         /// <summary>
         /// Changes the current monster if it dies and increases counter by one if needed.
         /// If all monsters are died then end the game.
@@ -308,11 +318,15 @@ namespace FightSimulation
             //this is monster1
             if (currentMonster1.health <= 0)
             {
-
                 //increases counter by one if monster 1 dies.
                 currentMonsterIndex++;
-                currentMonster1 = monsters[currentMonsterIndex];
 
+                if(TryEndSimulation())
+                {
+                    return;
+                }
+
+                currentMonster1 = monsters[currentMonsterIndex];
             }
 
             //then this is monster 2 replace
@@ -321,17 +335,15 @@ namespace FightSimulation
 
                 //increases counter by one if monster 2 dies
                 currentMonsterIndex++;
+
+                if (TryEndSimulation())
+                {
+                    return;
+                }
+
                 currentMonster2 = monsters[currentMonsterIndex];
-
             }
 
-            //if either monster is set or initilized by "None" and the last monster has been put out
-            if (currentMonster2.name == "None" || currentMonster1.name == "None" && currentMonsterIndex >= 4)
-            {
-
-                //... game is ending
-                currentScence = 2;
-            }
         } 
 
         /// <summary>
